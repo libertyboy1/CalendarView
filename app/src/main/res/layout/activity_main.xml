@@ -1,86 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/dl_main"
-    android:background="@color/white">
-
-    <com.view.calendar.view.CalendarView
-        android:id="@+id/cv_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_gravity="start"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+
+        android:weightSum="1">
+
+        <com.view.calendar.view.CalendarView
+            android:id="@+id/cv_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="210dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="@color/white"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/rl_title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:background="@android:color/holo_red_light"
-            android:paddingLeft="10dp"
-            android:paddingTop="8dp">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_CurrentMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="11月"
+                    android:textColor="@android:color/white"
+                    android:textSize="26dp" />
+
+                <TextView
+                    android:id="@+id/tv_CurrentYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/tv_CurrentMonth"
+                    android:text="sss"
+                    android:textColor="@android:color/white"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_GapCountString"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_CurrentYear"
+                    android:layout_below="@+id/tv_CurrentYear"
+                    android:textColor="@android:color/white"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_CurrentMonth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="11月"
-                android:textColor="@android:color/white"
-                android:textSize="26dp" />
-
-            <TextView
-                android:id="@+id/tv_CurrentYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/tv_CurrentMonth"
-                android:text="sss"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/tv_GapCountString"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tv_CurrentYear"
-                android:layout_below="@+id/tv_CurrentYear"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <TextView
-                android:gravity="center"
-                android:textSize="22dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/white"
-                android:text="星期四"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_CurrentMonth"
-                android:layout_alignParentStart="true"
                 android:id="@+id/tv_week"
-                android:layout_alignParentEnd="true" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="星期四"
+                android:textColor="@color/white"
+                android:textSize="22dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/rb_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@android:color/darker_gray" />
 
             <RadioButton
                 android:id="@+id/rb_single"

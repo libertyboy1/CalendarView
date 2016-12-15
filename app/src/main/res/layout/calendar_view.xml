@@ -109,7 +109,6 @@
         android:id="@+id/vp_calendar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_gravity="center"
         android:background="@android:color/transparent" >
     </android.support.v4.view.ViewPager>
 

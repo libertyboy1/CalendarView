@@ -5,9 +5,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -20,12 +20,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener{
     private RadioGroup rb_main;
     private TextView monthText, yearText, gapCountText, tv_week;
     private Typeface typeFace;
     private DrawerLayout dl_main;
     private CalendarView cv_main;
+    private float y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +40,33 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 
     private void setListener() {
         rb_main.setOnCheckedChangeListener(this);
+
         dl_main.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View arg0, float arg1) {
                 if (!StringUtil.isNullOrEmpty(DateUtil.start_date)) {
                     try {
-                        monthText.setText(new SimpleDateFormat("M月d日").format(new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.start_date)));
-                        yearText.setText(DateUtil.getYear() + "");
-                        gapCountText.setText("1");
-                        tv_week.setText("星期" + DateUtil.getWeek(DateUtil.start_date));
                         if (CalendarCard.isDoubleChoose){
+                            yearText.setVisibility(View.GONE);
+                            gapCountText.setVisibility(View.GONE);
+
                             if (!StringUtil.isNullOrEmpty(DateUtil.start_date)&&!StringUtil.isNullOrEmpty(DateUtil.end_date)){
                                 int num=DateUtil.getGapCount(DateUtil.start_date,DateUtil.end_date)+1;
-                                gapCountText.setText("已选择"+Math.abs(num)+"天");
+                                monthText.setTextSize(16);
+                                monthText.setText("已选择"+Math.abs(num)+"天");
+                                String str_sDate=new SimpleDateFormat("M月d日").format(new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.start_date));
+                                String str_eDate=new SimpleDateFormat("M月d日").format(new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.end_date));
+                                tv_week.setText(str_sDate+"～"+str_eDate);
                             }
                         }else{
+                            yearText.setVisibility(View.VISIBLE);
+                            gapCountText.setVisibility(View.VISIBLE);
+                            monthText.setTextSize(26);
+                            monthText.setText(new SimpleDateFormat("M月d日").format(new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.start_date)));
+                            yearText.setText(DateUtil.getYear() + "");
+                            gapCountText.setText("1");
+                            tv_week.setText("星期" + DateUtil.getWeek(DateUtil.start_date));
+
                             gapCountText.setText(DateUtil.getStringGapCount(new Date(System.currentTimeMillis()),
                                     new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.start_date)));
                         }

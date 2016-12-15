@@ -126,11 +126,19 @@ public class DateUtil {
      * @return true 开始早于结束 false 结束早于开始
      */
     public static boolean isFront(String start_date, String end_date) {
-        if (start_date.compareTo(end_date) > 0) {
-            // 结束日期早于开始日期
-            return false;
+
+        try {
+            long sDate = new SimpleDateFormat("yyyy-MM-dd").parse(start_date).getTime();
+            long eDate = new SimpleDateFormat("yyyy-MM-dd").parse(end_date).getTime();
+            if (sDate < eDate) {
+                // 结束日期早于开始日期
+                return false;
+            }
+            return true;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     /**

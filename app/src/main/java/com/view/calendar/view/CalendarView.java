@@ -3,6 +3,10 @@ package com.view.calendar.view;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -10,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -43,7 +48,7 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
     public void onFinish(int width, int height) {
         if (isChanged) {
             isChanged = false;
-            mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext, height)));
+            mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext, height+5)));
         }
     }
 
@@ -194,5 +199,6 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
         }
         mDirection = SildeDirection.NO_SILDE;
     }
+
 
 }
