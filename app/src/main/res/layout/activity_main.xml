@@ -3,54 +3,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dl_main"
     android:background="@color/white">
 
     <com.view.calendar.view.CalendarView
+        android:id="@+id/cv_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
     <LinearLayout
-        android:layout_width="160dp"
-        android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/holo_red_light"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tv_CurrentMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="11月"
+                android:textColor="@android:color/white"
+                android:textSize="26dp" />
+
+            <TextView
+                android:id="@+id/tv_CurrentYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/tv_CurrentMonth"
+                android:text="sss"
+                android:textColor="@android:color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_GapCountString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_CurrentYear"
+                android:layout_below="@+id/tv_CurrentYear"
+                android:textColor="@android:color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:gravity="center"
+                android:textSize="22dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:text="星期四"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_CurrentMonth"
+                android:layout_alignParentStart="true"
+                android:id="@+id/tv_week"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
         <RadioGroup
             android:id="@+id/rb_main"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray" />
 
-        <RadioButton
-            android:checked="true"
-            android:id="@+id/rb_single"
-            android:padding="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="单选日期"/>
+            <RadioButton
+                android:id="@+id/rb_single"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="15dp"
+                android:text="单选日期" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray" />
 
-        <RadioButton
-            android:id="@+id/rb_multi"
-            android:padding="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="多选日期"/>
+            <RadioButton
+                android:id="@+id/rb_multi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="多选日期" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray" />
 
         </RadioGroup>
 

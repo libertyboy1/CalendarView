@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">calendar</string>
+    <string name="app_name">日历</string>
     <string name="sunday">日</string>
     <string name="monday">一</string>
     <string name="thesday">二</string>

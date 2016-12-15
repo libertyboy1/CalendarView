@@ -35,6 +35,7 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
     private CalendarCard[] mShowViews;
     private CalendarViewAdapter<CalendarCard> adapter;
     private SildeDirection mDirection = SildeDirection.NO_SILDE;
+    private  CalendarCard[] views;
 
     private boolean isChanged = true;
 
@@ -79,9 +80,9 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
         view = LayoutInflater.from(mContext).inflate(R.layout.calendar_view, this, true);
 
         mViewPager = (ViewPager) view.findViewById(R.id.vp_calendar);
-        monthText = (TextView) view.findViewById(R.id.tvCurrentMonth);
         closeImgBtn = (ImageButton) view.findViewById(R.id.btnClose);
         yearText = (TextView) view.findViewById(R.id.tvCurrentYear);
+        monthText = (TextView) view.findViewById(R.id.tvCurrentMonth);
         gapCountText = (TextView) view.findViewById(R.id.tvGapCountString);
 
         monthText.setTypeface(typeFace);
@@ -90,7 +91,7 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
 
         closeImgBtn.setOnClickListener(this);
 
-        CalendarCard[] views = new CalendarCard[3];
+        views = new CalendarCard[3];
         for (int i = 0; i < 3; i++) {
             views[i] = new CalendarCard(mContext, this);
             views[i].setOnDrawRowFinishLitener(this);
@@ -180,6 +181,7 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
             mDirection = SildeDirection.LEFT;
         }
         mCurrentIndex = arg0;
+
     }
 
     // 更新日历视图

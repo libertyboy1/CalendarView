@@ -19,6 +19,8 @@ import com.view.calendar.util.CalendarUtil;
 import com.view.calendar.util.DateUtil;
 import com.view.calendar.util.StringUtil;
 
+import static android.R.attr.y;
+
 /**
  * 自定义日历卡
  *
@@ -470,5 +472,6 @@ public class CalendarCard extends View {
     public void setOnDrawRowFinishLitener(OnDrawRowFinishLitener mDrawRowFinishLitener) {
         this.mDrawRowFinishLitener = mDrawRowFinishLitener;
     }
+
 
 }
