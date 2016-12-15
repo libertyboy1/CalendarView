@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 
 import com.view.calendar.model.CustomDate;
+import com.view.calendar.presenter.CalendarCardPresenterImpl;
 import com.view.calendar.util.CalendarUtil;
 import com.view.calendar.util.DateUtil;
 import com.view.calendar.util.StringUtil;
@@ -47,7 +48,7 @@ public class CalendarCard extends View {
 
     private Row rows[] = new Row[TOTAL_ROW]; // 行数组，每个元素代表一行
     private static CustomDate mShowDate; // 自定义的日期，包括year,month,day
-    private OnCellClickListener mCellClickListener; // 单元格点击回调事件
+    public OnCellClickListener mCellClickListener; // 单元格点击回调事件
     private OnDrawRowFinishLitener mDrawRowFinishLitener;//组全部画完回调
     private int touchSlop; //
     private boolean callBackCellSpace;
@@ -58,6 +59,8 @@ public class CalendarCard extends View {
     private Typeface typeFace;
 
     public static boolean isDoubleChoose = false;
+
+    private CalendarCardPresenterImpl presenter;
 
     /**
      * 单元格点击的回调接口
@@ -103,6 +106,7 @@ public class CalendarCard extends View {
     }
 
     private void init(Context context) {
+        presenter=new CalendarCardPresenterImpl(this);
         typeFace = Typeface.createFromAsset(context.getAssets(), "font.ttf");
         mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -227,77 +231,7 @@ public class CalendarCard extends View {
 
             String click_date = date.year + "-" + date.month + "-" + date.day;
 
-            if (!isDoubleChoose) {
-                mCellClickListener.clickDate(date);
-                DateUtil.start_date = click_date;
-                DateUtil.end_date="";
-                Log.e("DateUtil.start_date1", DateUtil.start_date );
-            } else {
-                /******* 判断开始时间是否为空（是否第一次选择日期） *******/
-                if (StringUtil.isNullOrEmpty(DateUtil.start_date) && StringUtil.isNullOrEmpty(DateUtil.end_date)) {
-                    /*** 当前为第一次选择日期 ****/
-                    DateUtil.start_date = click_date;
-                    Log.e("DateUtil.start_date2", DateUtil.start_date );
-                } else if (!StringUtil.isNullOrEmpty(DateUtil.start_date) && StringUtil.isNullOrEmpty(DateUtil.end_date)) {
-                    /***** 当前为第二次选择时间 *****/
-                    /**** 判断当前选择时间是否早于开始时间 ***/
-                    Log.e("DateUtil.start_date---", DateUtil.start_date );
-                    if (DateUtil.isFront(DateUtil.start_date, click_date)) {
-                        /****** 当前选择时间早于开始时间，将当前选择时间设置成开始时间，将原开始时间设置为结束时间 *****/
-                        DateUtil.end_date = DateUtil.start_date;
-                        DateUtil.start_date = click_date;
-                        Log.e("click_date3", click_date);
-                        Log.e("DateUtil.start_date3", DateUtil.start_date );
-                        Log.e("DateUtil.end_date3", DateUtil.end_date );
-                    } else {
-                        /***** 当前选择时间晚于开始时间，将当前选择时间设置成结束时间 *****/
-                        DateUtil.end_date = click_date;
-                        Log.e("DateUtil.end_date4", DateUtil.end_date );
-                    }
-                } else {
-                    /*** 后续选择时间 ****/
-                    try {
-                        int start = DateUtil.getGapCount(new SimpleDateFormat("yyyy-MM-dd").parse(click_date),
-                                new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.start_date));
-                        /**** 当前选择时间距离开始时间的天数 ****/
-                        int end = DateUtil.getGapCount(new SimpleDateFormat("yyyy-MM-dd").parse(click_date),
-                                new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.end_date));
-                        /***** 当前选择时间距离结束时间的天数 ******/
-
-                        if (start > 0) {
-                            /**** 当前选择时间在开始时间之前 *****/
-                            DateUtil.start_date = click_date;
-                            Log.e("DateUtil.start_date5", DateUtil.start_date );
-                        } else if (end < 0) {
-                            /**** 当前选择时间在结束时间之后 *****/
-                            DateUtil.end_date = click_date;
-                            Log.e("DateUtil.end_date6", DateUtil.end_date );
-                        } else if (start < 0 && end > 0) {
-                            /***** 当前选择时间在开始时间和结束时间之间 *****/
-
-                            if (Math.abs(start) < Math.abs(end)) {
-                                /**** 当前选择时间距离开始时间较近 *****/
-                                DateUtil.start_date = click_date;
-                                Log.e("DateUtil.start_date7", DateUtil.start_date );
-                                /**** 重设开始时间为当前选择时间 ******/
-                            } else if (Math.abs(start) >= Math.abs(end)) {
-                                /***** 当前选择时间距离结束时间较近 *******/
-                                DateUtil.end_date = click_date;
-                                Log.e("DateUtil.end_date8", DateUtil.end_date );
-                                /****** 重设结束时间为当前选择时间 ********/
-                            }
-
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                mCellClickListener.doubleClickDate();
-
-            }
+            presenter.setChooseDate(date,click_date);
 
             // 刷新界面
             update();
@@ -487,8 +421,5 @@ public class CalendarCard extends View {
     public void setOnDrawRowFinishLitener(OnDrawRowFinishLitener mDrawRowFinishLitener) {
         this.mDrawRowFinishLitener = mDrawRowFinishLitener;
     }
-
-
-
 
 }
