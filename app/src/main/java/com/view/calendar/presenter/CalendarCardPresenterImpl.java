@@ -24,11 +24,13 @@ public class CalendarCardPresenterImpl implements CalendarCardPresenter {
     @Override
     public void setChooseDate(CustomDate date,String clickDate) {
 
-        if (!isDoubleChoose) {
+        if (isDoubleChoose==0) {
             card.mCellClickListener.clickDate(date);
             DateUtil.start_date =  clickDate;
             DateUtil.end_date="";
-        } else {
+            DateUtil.dates.clear();
+        } else if (isDoubleChoose==1){
+            DateUtil.dates.clear();
             /******* 判断开始时间是否为空（是否第一次选择日期） *******/
             if (StringUtil.isNullOrEmpty(DateUtil.start_date) && StringUtil.isNullOrEmpty(DateUtil.end_date)) {
                 /*** 当前为第一次选择日期 ****/
@@ -79,9 +81,15 @@ public class CalendarCardPresenterImpl implements CalendarCardPresenter {
                 }
 
             }
-
             card.mCellClickListener.doubleClickDate();
 
+        }else if (isDoubleChoose==2){
+            DateUtil.start_date="";
+            DateUtil.end_date="";
+            if (!DateUtil.dates.contains(clickDate)){
+                DateUtil.dates.add(clickDate);
+            }
+            card.mCellClickListener.doubleClickDate();
         }
 
     }

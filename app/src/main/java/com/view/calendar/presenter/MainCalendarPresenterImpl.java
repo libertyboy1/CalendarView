@@ -37,7 +37,7 @@ public class MainCalendarPresenterImpl implements MainCalendarPresenter, RadioGr
     private void setDrawerTitleInfo() {
         if (!StringUtil.isNullOrEmpty(DateUtil.start_date)) {
             try {
-                if (CalendarCard.isDoubleChoose) {
+                if (CalendarCard.isDoubleChoose==1) {
                     mActivity.yearText.setVisibility(View.GONE);
                     mActivity.gapCountText.setVisibility(View.GONE);
 
@@ -49,7 +49,7 @@ public class MainCalendarPresenterImpl implements MainCalendarPresenter, RadioGr
                         String str_eDate = new SimpleDateFormat("M月d日").format(new SimpleDateFormat("yyyy-MM-dd").parse(DateUtil.end_date));
                         mActivity.tv_week.setText(str_sDate + "～" + str_eDate);
                     }
-                } else {
+                } else if (CalendarCard.isDoubleChoose==0){
                     mActivity.yearText.setVisibility(View.VISIBLE);
                     mActivity.gapCountText.setVisibility(View.VISIBLE);
                     mActivity.monthText.setTextSize(26);
@@ -64,6 +64,16 @@ public class MainCalendarPresenterImpl implements MainCalendarPresenter, RadioGr
 
             } catch (ParseException e) {
                 e.printStackTrace();
+            }
+        }else{
+            if (CalendarCard.isDoubleChoose==2){
+                mActivity.yearText.setVisibility(View.VISIBLE);
+                mActivity.gapCountText.setVisibility(View.VISIBLE);
+                mActivity.monthText.setTextSize(26);
+                mActivity.monthText.setText(new SimpleDateFormat("M月d日").format(new Date(System.currentTimeMillis())));
+                mActivity.yearText.setText(DateUtil.getYear() + "");
+                mActivity.gapCountText.setText("今天");
+                mActivity.tv_week.setText("星期" + DateUtil.getWeek(System.currentTimeMillis()));
             }
         }
 
@@ -106,11 +116,15 @@ public class MainCalendarPresenterImpl implements MainCalendarPresenter, RadioGr
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         switch (i) {
             case R.id.rb_single:
-                CalendarCard.isDoubleChoose = false;
+                CalendarCard.isDoubleChoose = 0;
                 mActivity.dl_main.closeDrawers();
                 break;
             case R.id.rb_multi:
-                CalendarCard.isDoubleChoose = true;
+                CalendarCard.isDoubleChoose = 1;
+                mActivity.dl_main.closeDrawers();
+                break;
+            case R.id.rb_select:
+                CalendarCard.isDoubleChoose = 2;
                 mActivity.dl_main.closeDrawers();
                 break;
         }

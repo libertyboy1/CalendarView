@@ -164,11 +164,11 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
 
     @Override
     public void doubleClickDate() {
-        if (!StringUtil.isNullOrEmpty(DateUtil.end_date)&&!StringUtil.isNullOrEmpty(DateUtil.start_date)){
+        if (CalendarCard.isDoubleChoose==1){
             int num=DateUtil.getGapCount(DateUtil.start_date,DateUtil.end_date)+1;
             gapCountText.setText("已选择"+Math.abs(num)+"天");
-            Log.e("start_date",DateUtil.start_date+"");
-            Log.e("end_date",DateUtil.end_date+"");
+        }else{
+            gapCountText.setText("已选择"+DateUtil.dates.size()+"天");
         }
     }
 

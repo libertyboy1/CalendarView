@@ -49,7 +49,7 @@ public class CalendarCard extends View {
     private Row rows[] = new Row[TOTAL_ROW]; // 行数组，每个元素代表一行
     private static CustomDate mShowDate; // 自定义的日期，包括year,month,day
     public OnCellClickListener mCellClickListener; // 单元格点击回调事件
-    private OnDrawRowFinishLitener mDrawRowFinishLitener;//组全部画完回调
+    private OnDrawRowFinishLitener mDrawRowFinishLitener;//组全部画完回调65
     private int touchSlop; //
     private boolean callBackCellSpace;
 
@@ -58,7 +58,7 @@ public class CalendarCard extends View {
     private String current_date;
     private Typeface typeFace;
 
-    public static boolean isDoubleChoose = false;
+    public static int isDoubleChoose = 0;
 
     private CalendarCardPresenterImpl presenter;
 
@@ -180,7 +180,6 @@ public class CalendarCard extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mViewWidth = w;
         mViewHeight = h;
-//        mCellSpace = mViewWidth / TOTAL_COL;
 		mCellSpace = Math.min(mViewHeight / TOTAL_ROW, mViewWidth / TOTAL_COL);
         if (!callBackCellSpace) {
             callBackCellSpace = true;
@@ -372,6 +371,13 @@ public class CalendarCard extends View {
                 mCirclePaint.setColor(Color.parseColor("#F24949")); // 红色圆形
                 canvas.drawCircle((float) (mCellSpace * (i + 0.5)), (float) ((j + 0.5) * mCellSpace), mCellSpace / 2.5f, mCirclePaint);
             }
+
+            if (DateUtil.dates.contains(date.year + "-" + date.month + "-" + date.day)){
+                mCirclePaint.setColor(Color.parseColor("#efefef")); // 灰色选中圆形
+                canvas.drawCircle((float) (mCellSpace * (i + 0.5)), (float) ((j + 0.5) * mCellSpace), mCellSpace / 2.5f, mCirclePaint);
+                mTextPaint.setColor(Color.BLACK);
+            }
+
 
             mTextPaint.setTextSize(mCellSpace / 3);
             canvas.drawText(content, (float) ((i + 0.5) * mCellSpace - mTextPaint.measureText(content) / 2),

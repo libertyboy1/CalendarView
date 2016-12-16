@@ -2,6 +2,7 @@ package com.view.calendar.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ public class DateUtil {
 
     public static String start_date, end_date;
     private static SimpleDateFormat sdf;
+    public static ArrayList<String> dates=new ArrayList<String>();
 
     public static int getMonthDays(int year, int month) {
         if (month > 12) {
