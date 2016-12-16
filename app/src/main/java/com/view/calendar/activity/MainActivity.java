@@ -1,4 +1,4 @@
-package com.view.calendar;
+package com.view.calendar.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.Window;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.view.calendar.R;
 import com.view.calendar.presenter.MainCalendarPresenterImpl;
 import com.view.calendar.view.CalendarView;
 

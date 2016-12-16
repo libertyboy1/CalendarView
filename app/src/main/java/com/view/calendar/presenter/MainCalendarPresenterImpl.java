@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.view.calendar.MainActivity;
+import com.view.calendar.activity.MainActivity;
 import com.view.calendar.R;
 import com.view.calendar.util.DateUtil;
 import com.view.calendar.util.StringUtil;
