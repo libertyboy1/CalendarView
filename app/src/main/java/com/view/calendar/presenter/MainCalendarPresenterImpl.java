@@ -107,7 +107,16 @@ public class MainCalendarPresenterImpl implements MainCalendarPresenter, RadioGr
         mActivity.dl_main.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View arg0, float arg1) {
-                setDrawerTitleInfo();
+//                setDrawerTitleInfo();
+
+                mActivity.yearText.setVisibility(View.VISIBLE);
+                mActivity.gapCountText.setVisibility(View.VISIBLE);
+                mActivity.monthText.setTextSize(26);
+                mActivity.monthText.setText(new SimpleDateFormat("M月d日").format(new Date(System.currentTimeMillis())));
+                mActivity.yearText.setText(DateUtil.getYear() + "");
+                mActivity.gapCountText.setText("今天");
+                mActivity.tv_week.setText("星期" + DateUtil.getWeek(System.currentTimeMillis()));
+
             }
         });
     }
