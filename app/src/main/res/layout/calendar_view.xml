@@ -4,14 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@android:color/holo_red_light"
         android:paddingLeft="8dp"
-        android:paddingTop="8dp" >
+        android:paddingTop="8dp">
+
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/menu" />
 
         <ImageButton
             android:id="@+id/btnClose"
@@ -26,8 +34,8 @@
             android:id="@+id/tvCurrentMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/iv_menu"
             android:text="11月"
             android:textColor="@android:color/white"
             android:textSize="26dp" />
@@ -57,13 +65,13 @@
         android:layout_height="40dp"
         android:background="@android:color/holo_red_light"
         android:orientation="vertical"
-        android:paddingBottom="8dp" >
+        android:paddingBottom="8dp">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="20dip"
             android:layout_marginBottom="2dip"
-            android:layout_marginTop="2dip" >
+            android:layout_marginTop="2dip">
 
             <TableRow>
 
@@ -109,13 +117,12 @@
         android:id="@+id/vp_calendar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@android:color/transparent" >
-    </android.support.v4.view.ViewPager>
+        android:background="@android:color/transparent"></android.support.v4.view.ViewPager>
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="20dp"-->
-        <!--android:background="@android:color/darker_gray"></LinearLayout>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:background="@android:color/darker_gray"></LinearLayout>-->
 
 
 </LinearLayout>

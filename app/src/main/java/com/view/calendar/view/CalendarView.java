@@ -13,16 +13,19 @@ import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.view.calendar.R;
+import com.view.calendar.activity.MainActivity;
 import com.view.calendar.adapter.CalendarViewAdapter;
 import com.view.calendar.model.CustomDate;
 import com.view.calendar.util.DateUtil;
@@ -36,6 +39,8 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
     private Context mContext;
 
     private ViewPager mViewPager;
+    private ImageView iv_menu;
+
     private int mCurrentIndex = 498;
     private CalendarCard[] mShowViews;
     private CalendarViewAdapter<CalendarCard> adapter;
@@ -89,12 +94,14 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
         yearText = (TextView) view.findViewById(R.id.tvCurrentYear);
         monthText = (TextView) view.findViewById(R.id.tvCurrentMonth);
         gapCountText = (TextView) view.findViewById(R.id.tvGapCountString);
+        iv_menu= (ImageView) view.findViewById(R.id.iv_menu);
 
         monthText.setTypeface(typeFace);
         yearText.setTypeface(typeFace);
         gapCountText.setTypeface(typeFace);
 
         closeImgBtn.setOnClickListener(this);
+        iv_menu.setOnClickListener(this);
 
         views = new CalendarCard[3];
         for (int i = 0; i < 3; i++) {
@@ -139,6 +146,9 @@ public class CalendarView extends LinearLayout implements OnClickListener, Calen
         switch (v.getId()) {
             case R.id.btnClose:
                 ((Activity) mContext).finish();
+                break;
+            case R.id.iv_menu:
+                ((MainActivity)mContext).dl_main.openDrawer(Gravity.LEFT);
                 break;
             default:
                 break;
